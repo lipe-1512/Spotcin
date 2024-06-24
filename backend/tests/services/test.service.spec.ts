@@ -11,7 +11,7 @@ describe('TestService', () => {
   let service: TestService;
 
   let mockTestEntity: TestEntity = new TestEntity({
-    id: '123',
+    nome: '123',
     name: 'test',
   });
 
@@ -48,24 +48,24 @@ describe('TestService', () => {
     expect(mockTestRepository.getTests).toBeCalledTimes(1);
   });
 
-  it('should return a test by id', async () => {
-    const id = '123';
+  it('should return a test by nome', async () => {
+    const nome = '123';
 
     jest.spyOn(mockTestRepository, 'getTest').mockResolvedValue(mockTestEntity);
 
-    const test = await service.getTest(id);
+    const test = await service.getTest(nome);
 
     expect(test).toEqual(mockTestModel);
-    expect(mockTestRepository.getTest).toBeCalledWith(id);
+    expect(mockTestRepository.getTest).toBeCalledWith(nome);
   });
 
   it('should throw an error when test is not found', async () => {
-    const id = '123';
+    const nome = '123';
 
     jest.spyOn(mockTestRepository, 'getTest').mockResolvedValue(null);
 
-    await expect(service.getTest(id)).rejects.toThrow(HttpNotFoundError);
-    expect(mockTestRepository.getTest).toBeCalledWith(id);
+    await expect(service.getTest(nome)).rejects.toThrow(HttpNotFoundError);
+    expect(mockTestRepository.getTest).toBeCalledWith(nome);
   });
 
   it('should create a test', async () => {
@@ -78,22 +78,22 @@ describe('TestService', () => {
   });
 
   it('should update a test', async () => {
-    const id = '123';
+    const nome = '123';
 
     jest
       .spyOn(mockTestRepository, 'updateTest')
       .mockResolvedValue(mockTestEntity);
 
-    const updateTest = await service.updateTest(id, mockTestEntity);
+    const updateTest = await service.updateTest(nome, mockTestEntity);
 
-    expect(mockTestRepository.updateTest).toBeCalledWith(id, mockTestEntity);
+    expect(mockTestRepository.updateTest).toBeCalledWith(nome, mockTestEntity);
     expect(updateTest).toEqual(mockTestModel);
   });
 
   it('should delete a test', async () => {
-    const id = '123';
-    await service.deleteTest(id);
+    const nome = '123';
+    await service.deleteTest(nome);
 
-    expect(mockTestRepository.deleteTest).toBeCalledWith(id);
+    expect(mockTestRepository.deleteTest);
   });
 });

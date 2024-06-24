@@ -1,6 +1,6 @@
 import Injector from './di/injector';
 import CategoriaRepository from './repositories/categoria.repository';
-import CategoriaService from './services/categoria.service';
+import CategoriaService from './services/category.service';
 import TestRepository from './repositories/test.repository';
 import TestService from './services/test.service';
 
@@ -15,9 +15,9 @@ injector.registerService(
   CategoriaService,
   new CategoriaService(injector.getRepository(CategoriaRepository))
 );
-injector.registerService(
+/*injector.registerService(
   TestService,
   new TestService(injector.getRepository(TestRepository))
-);
+);*/
 
 export default injector;

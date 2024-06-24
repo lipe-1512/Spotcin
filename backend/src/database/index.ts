@@ -23,7 +23,7 @@ export default class Database {
     Database.getInstance().data = {
       tests: [
         new TestEntity({
-          id: '89ecc32a-aec7-4b71-adfd-03287e4ca74f',
+          nome: '89ecc32a-aec7-4b71-adfd-03287e4ca74f',
           name: 'Test Seed',
         }),
       ],

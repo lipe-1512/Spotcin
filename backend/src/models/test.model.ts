@@ -4,7 +4,7 @@ export default class TestModel extends BaseModel {
   name: string;
 
   constructor(data: TestModel) {
-    super(data.id || '');
+    super(data.nome || '');
     this.name = data.name;
   }
 }

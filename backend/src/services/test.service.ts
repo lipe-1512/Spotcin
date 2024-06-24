@@ -36,8 +36,8 @@ class TestService {
     return testsModel;
   }
 
-  public async getTest(id: string): Promise<TestModel> {
-    const testEntity = await this.testRepository.getTest(id);
+  public async getTest(nome: string): Promise<TestModel> {
+    const testEntity = await this.testRepository.getTest(nome);
 
     if (!testEntity) {
       throw new HttpNotFoundError({
@@ -58,8 +58,8 @@ class TestService {
     return testModel;
   }
 
-  public async updateTest(id: string, data: TestEntity): Promise<TestModel> {
-    const testEntity = await this.testRepository.updateTest(id, data);
+  public async updateTest(nome: string, data: TestEntity): Promise<TestModel> {
+    const testEntity = await this.testRepository.updateTest(nome, data);
 
     if (!testEntity) {
       throw new HttpNotFoundError({
@@ -73,8 +73,8 @@ class TestService {
     return testModel;
   }
 
-  public async deleteTest(id: string): Promise<void> {
-    await this.testRepository.deleteTest(id);
+  public async deleteTest(nome: string): Promise<void> {
+    await this.testRepository.deleteTest(nome);
   }
 }
 

@@ -23,16 +23,16 @@ class TestController {
       this.getOthersTests(req, res)
     );
 
-    this.router.get(`${this.prefix}/:id`, (req: Request, res: Response) =>
+    this.router.get(`${this.prefix}/:nome`, (req: Request, res: Response) =>
       this.getTest(req, res)
     );
     this.router.post(this.prefix, (req: Request, res: Response) =>
       this.createTest(req, res)
     );
-    this.router.put(`${this.prefix}/:id`, (req: Request, res: Response) =>
+    this.router.put(`${this.prefix}/:nome`, (req: Request, res: Response) =>
       this.updateTest(req, res)
     );
-    this.router.delete(`${this.prefix}/:id`, (req: Request, res: Response) =>
+    this.router.delete(`${this.prefix}/:nome`, (req: Request, res: Response) =>
       this.deleteTest(req, res)
     );
   }
@@ -56,7 +56,7 @@ class TestController {
   }
 
   private async getTest(req: Request, res: Response) {
-    const test = await this.testService.getTest(req.params.id);
+    const test = await this.testService.getTest(req.params.nome);
 
     return new SuccessResult({
       msg: Result.transformRequestOnMsg(req),
@@ -75,7 +75,7 @@ class TestController {
 
   private async updateTest(req: Request, res: Response) {
     const test = await this.testService.updateTest(
-      req.params.id,
+      req.params.nome,
       new TestEntity(req.body)
     );
 
@@ -86,7 +86,7 @@ class TestController {
   }
 
   private async deleteTest(req: Request, res: Response) {
-    await this.testService.deleteTest(req.params.id);
+    await this.testService.deleteTest(req.params.nome);
 
     return new SuccessResult({
       msg: Result.transformRequestOnMsg(req),

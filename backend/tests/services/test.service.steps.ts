@@ -42,10 +42,10 @@ defineFeature(feature, (test) => {
 
     test('Return all tests', ({ given, when, then }) => {
         given(
-            /^o método getTests do TestService retorna um array com o test de nome "(.*)" e id "(.*)"$/, 
+            /^o método getTests do TestService retorna um array com o test de nome "(.*)" e nome "(.*)"$/, 
             async (testName, testId) => {
                 mockTestEntity = new TestEntity({
-                    id: testId,
+                    nome: testId,
                     name: testName,
                 });
 
@@ -58,24 +58,24 @@ defineFeature(feature, (test) => {
         }
         );
 
-        then(/^o array retornado deve conter o test de nome "(.*)" e id "(.*)"$/, (testName, testId) => {
+        then(/^o array retornado deve conter o test de nome "(.*)" e nome "(.*)"$/, (testName, testId) => {
             
             mockTestModel = new TestModel(
-                new TestEntity({ id: testId, name: testName })
+                new TestEntity({ nome: testId, name: testName })
             );
 
             expect(tests).toEqual([mockTestModel]);
         });
     });
 
-    test('Return test by id', ({ given, when, then }) => {
+    test('Return test by nome', ({ given, when, then }) => {
         given(
-            /^o método getTest chamado com "(.*)" do TestService retorna um test de nome "(.*)" e id "(.*)"$/, 
-            async (id, testName, testId) => {
-                idToCall = id;
+            /^o método getTest chamado com "(.*)" do TestService retorna um test de nome "(.*)" e nome "(.*)"$/, 
+            async (nome, testName, testId) => {
+                idToCall = nome;
 
                 mockTestEntity = new TestEntity({
-                    id: testId,
+                    nome: testId,
                     name: testName,
                 });
 
@@ -84,15 +84,15 @@ defineFeature(feature, (test) => {
         });
 
         when(
-            /^o método getTest do TestService for chamado com o id "(.*)"$/, 
+            /^o método getTest do TestService for chamado com o nome "(.*)"$/, 
             async (testId) => {
             testReturned = await service.getTest(testId);
         }
         );
 
-        then(/^o test retornado deve ter o nome "(.*)" e id "(.*)"$/, (testName, testId) => {
+        then(/^o test retornado deve ter o nome "(.*)" e nome "(.*)"$/, (testName, testId) => {
             
-            const testEntity = new TestEntity({ id: testId, name: testName });
+            const testEntity = new TestEntity({ nome: testId, name: testName });
 
             expect(testReturned).toEqual(testEntity);
             expect(mockTestRepository.getTest).toBeCalledWith(idToCall);

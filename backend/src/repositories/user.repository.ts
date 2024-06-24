@@ -1,4 +1,4 @@
-import UserEntity from '../entities/user.entity';
+import UserEntity from '../entities/User.entity';
 import BaseRepository from './base.repository';
 
 class UserRepository extends BaseRepository<UserEntity> {
@@ -10,8 +10,8 @@ class UserRepository extends BaseRepository<UserEntity> {
     return await this.findAll();
   }
 
-  public async getUser(id: string): Promise<UserEntity | null> {
-    return await this.findOne((item) => item.id === id);
+  public async getUser(nome: string): Promise<UserEntity | null> {
+    return await this.findOne((item) => item.nome === nome);
   }
 
   public async createUser(data: UserEntity): Promise<UserEntity> {
@@ -19,14 +19,14 @@ class UserRepository extends BaseRepository<UserEntity> {
   }
 
   public async updateUser(
-    id: string,
+    nome: string,
     data: UserEntity
   ): Promise<UserEntity | null> {
-    return await this.update((item) => item.id === id, data);
+    return await this.update((item) => item.nome === nome, data);
   }
 
-  public async deleteUser(id: string): Promise<void> {
-    await this.delete((item) => item.id !== id);
+  public async deleteUser(nome: string): Promise<void> {
+    await this.delete((item) => item.nome !== nome);
   }
 }
 

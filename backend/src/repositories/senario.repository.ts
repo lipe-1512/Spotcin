@@ -10,8 +10,8 @@ class ScenarioRepository extends BaseRepository<ScenarioEntity> {
     return await this.findAll();
   }
 
-  public async getScenario(id: string): Promise<ScenarioEntity | null> {
-    return await this.findOne((item) => item.id === id);
+  public async getScenario(nome: string): Promise<ScenarioEntity | null> {
+    return await this.findOne((item) => item.nome === nome);
   }
 
   public async createScenario(data: ScenarioEntity): Promise<ScenarioEntity> {
@@ -19,14 +19,14 @@ class ScenarioRepository extends BaseRepository<ScenarioEntity> {
   }
 
   public async updateScenario(
-    id: string,
+    nome: string,
     data: ScenarioEntity
   ): Promise<ScenarioEntity | null> {
-    return await this.update((item) => item.id === id, data);
+    return await this.update((item) => item.nome === nome, data);
   }
 
-  public async deleteScenario(id: string): Promise<void> {
-    await this.delete((item) => item.id !== id);
+  public async deleteScenario(nome: string): Promise<void> {
+    await this.delete((item) => item.nome !== nome);
   }
 }
 

@@ -1,9 +1,9 @@
 import { Express, Router } from 'express';
-import { di } from '../di';
+import { di } from '../di/index';
 import TestController from '../controllers/test.controller';
 import TestService from '../services/test.service';
-import CategoriaController from '../controllers/categoria.controller';
-import CategoriaService from '../services/categoria.service';
+import CategoriaController from '../controllers/category.controller';
+import CategoriaService from '../services/category.service';
 
 
 const router = Router();

@@ -21,7 +21,7 @@ export default class BaseRepository<T extends BaseEntity> {
       }
       const newItem = {
         ...data,
-        id: uuidv4(),
+        nome: uuidv4(),
       };
       this.db.data[this.prefix].push(newItem);
       return newItem;
@@ -40,7 +40,7 @@ export default class BaseRepository<T extends BaseEntity> {
       }
       const item = this.db.data[this.prefix].find(filter);
       if (item) {
-        delete data.id;
+        delete data.nome;
         Object.assign(item, data);
         return item;
       }

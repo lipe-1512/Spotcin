@@ -10,8 +10,8 @@ class TestRepository extends BaseRepository<TestEntity> {
     return await this.findAll();
   }
 
-  public async getTest(id: string): Promise<TestEntity | null> {
-    return await this.findOne((item) => item.id === id);
+  public async getTest(nome: string): Promise<TestEntity | null> {
+    return await this.findOne((item) => item.nome === nome);
   }
 
   public async createTest(data: TestEntity): Promise<TestEntity> {
@@ -19,14 +19,14 @@ class TestRepository extends BaseRepository<TestEntity> {
   }
 
   public async updateTest(
-    id: string,
+    nome: string,
     data: TestEntity
   ): Promise<TestEntity | null> {
-    return await this.update((item) => item.id === id, data);
+    return await this.update((item) => item.nome === nome, data);
   }
 
-  public async deleteTest(id: string): Promise<void> {
-    await this.delete((item) => item.id !== id);
+  public async deleteTest(nome: string): Promise<void> {
+    await this.delete((item) => item.nome !== nome);
   }
 }
 

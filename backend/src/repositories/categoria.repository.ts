@@ -19,14 +19,14 @@ class CategoriaRepository extends BaseRepository<CategoriaEntity> {
   }
 
   public async updateCategoria(
-    id: string,
+    nome: string,
     data: CategoriaEntity
   ): Promise<CategoriaEntity | null> {
-    return await this.update((item) => item.id === id, data);
+    return await this.update((item) => item.nome === nome, data);
   }
 
-  public async deleteCategoria(id: string): Promise<void> {
-    await this.delete((item) => item.id !== id);
+  public async deleteCategoria(nome: string): Promise<void> {
+    await this.delete((item) => item.nome !== nome);
   }
 }
 
