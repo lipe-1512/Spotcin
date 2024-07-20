@@ -10,6 +10,9 @@ import UserRepository from '../repositories/user.repository';
 import UserService from '../services/user.service';
 import LoginService from '../services/login.service';
 
+import CategoriaRepository from '../repositories/categoria.repository';
+import CategoriaService from '../services/category.service';
+
 export const di = new Injector();
 
 // Test
@@ -41,3 +44,7 @@ di.registerService(
 // Playlist
 di.registerRepository(PlaylistRepository, new PlaylistRepository());
 di.registerService(PlaylistService, new PlaylistService(di.getRepository(PlaylistRepository)));
+
+//Category
+di.registerRepository(CategoriaRepository, new CategoriaRepository());
+di.registerService(CategoriaService, new CategoriaService(di.getRepository(CategoriaRepository)));
