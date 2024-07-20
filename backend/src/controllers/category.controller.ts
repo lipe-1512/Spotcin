@@ -25,7 +25,7 @@ class CategoriaController {
             const result = await this.categoriaService.createCategoria(nome);
             res.status(result.success ? 200 : 400).json(result);
         } catch (error) {
-            res.status(500).json({ error: error.message });
+            res.status(500).json({ error: (error as Error).message });
         }
     }
 
@@ -34,7 +34,7 @@ class CategoriaController {
             const result = await this.categoriaService.getCategorias();
             res.status(200).json(result);
         } catch (error) {
-            res.status(500).json({ error: error.message });
+            res.status(500).json({ error: (error as Error).message });
         }
     }
 
@@ -44,7 +44,7 @@ class CategoriaController {
             const result = await this.categoriaService.getCategoria(nome);
             res.status(result ? 200 : 404).json(result);
         } catch (error) {
-            res.status(500).json({ error: error.message });
+            res.status(500).json({ error: (error as Error).message });
         }
     }
 
@@ -54,7 +54,7 @@ class CategoriaController {
             const result = await this.categoriaService.deleteCategoria(nome);
             res.status(result.success ? 200 : 404).json(result);
         } catch (error) {
-            res.status(500).json({ error: error.message });
+            res.status(500).json({ error: (error as Error).message });
         }
     }
 }
