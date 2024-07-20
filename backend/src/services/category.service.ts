@@ -28,7 +28,7 @@ class CategoriaService {
             return { success: false, message: 'Categoria já existe' };
         }
 
-        const newCategoria = new CategoriaEntity(nome);
+        const newCategoria = new CategoriaEntity({nome});
         const createdCategoria = await this.categoriaRepository.createCategoria(newCategoria);
 
         if (!createdCategoria) {
