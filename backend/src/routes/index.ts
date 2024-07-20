@@ -9,6 +9,8 @@ import LoginService from '../services/login.service';
 
 import PlaylistController from '../controllers/playlist.controller';
 import PlaylistService from '../services/playlist.service';
+import CategoriaController from '../controllers/category.controller';
+import CategoriaService from '../services/category.service';
 
 
 const router = Router();
@@ -31,6 +33,11 @@ export default (app: Express) => {
   app.use(
     prefix,
     new PlaylistController(router, di.getService(PlaylistService)).router
+  );
+
+  app.use(
+    prefix,
+    new CategoriaController(router, di.getService(CategoriaService)).router
   );
 
 
