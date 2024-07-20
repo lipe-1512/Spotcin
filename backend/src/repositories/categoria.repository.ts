@@ -11,7 +11,9 @@ class CategoriaRepository extends BaseRepository<CategoriaEntity> {
     try {
       return await this.findAll();
     } catch (e) {
-      throw new InternalServerError('Erro ao buscar todas as categorias');
+      throw new InternalServerError({
+        msg: 'Erro ao buscar todas as categorias',
+      });
     }
   }
 
@@ -19,7 +21,9 @@ class CategoriaRepository extends BaseRepository<CategoriaEntity> {
     try {
       return await this.findOne((item) => item.nome === nome);
     } catch (e) {
-      throw new InternalServerError(`Erro ao buscar a categoria com o nome: ${nome}`);
+      throw new InternalServerError({
+        msg: `Erro ao buscar a categoria com o nome: ${nome}`,
+      });
     }
   }
 
@@ -27,7 +31,9 @@ class CategoriaRepository extends BaseRepository<CategoriaEntity> {
     try {
       return await this.add(data);
     } catch (e) {
-      throw new InternalServerError('Erro ao criar categoria');
+      throw new InternalServerError({
+        msg: 'Erro ao criar categoria',
+      });
     }
   }
 
@@ -39,7 +45,9 @@ class CategoriaRepository extends BaseRepository<CategoriaEntity> {
       }
       return updatedCategoria;
     } catch (e) {
-      throw new InternalServerError(`Erro ao atualizar a categoria com o nome: ${nome}`);
+      throw new InternalServerError({
+        msg: `Erro ao atualizar a categoria com o nome: ${nome}`,
+      });
     }
   }
 
@@ -47,7 +55,9 @@ class CategoriaRepository extends BaseRepository<CategoriaEntity> {
     try {
       await this.delete((item) => item.nome === nome);
     } catch (e) {
-      throw new InternalServerError(`Erro ao deletar a categoria com o nome: ${nome}`);
+      throw new InternalServerError({
+        msg: `Erro ao deletar a categoria com o nome: ${nome}`,
+      });
     }
   }
 }
