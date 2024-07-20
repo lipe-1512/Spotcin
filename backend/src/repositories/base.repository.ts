@@ -21,7 +21,7 @@ export default class BaseRepository<T extends BaseEntity> {
       }
       const newItem = {
         ...data,
-        id: uuidv4(),
+        id: data.id || uuidv4(),
       };
       this.db.data[this.prefix].push(newItem);
       return newItem;

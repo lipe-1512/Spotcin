@@ -1,0 +1,93 @@
+[33mcommit 52b5211c7a5fda5e8c5df661a994cb659fc5749d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Filipe Fernando da Silva Balbino <felipelolgxx@gmail.com>
+Date:   Tue May 28 21:32:27 2024 -0300
+
+    feat: creation of th Create_Category.feature
+
+[33mcommit d736b08b8f0df6f67f7ab143b35cde50c2ecb5b5[m
+Author: Filipe Fernando da Silva Balbino <felipelolgxx@gmail.com>
+Date:   Tue May 28 20:42:07 2024 -0300
+
+    add Create_Category.feature
+
+[33mcommit 6195684daf5db902a0ff0078c6dfab82ab8d0229[m
+Author: Filipe Fernando da Silva Balbino <felipelolgxx@gmail.com>
+Date:   Tue May 28 17:03:45 2024 -0300
+
+    Cenário: criar uma nova categoria   Given: o usuário “Felipe” está logado
+
+[33mcommit fd084f46d0e2c6089b4fdd6f99b3aa506e731719[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 28ca5fd 4e9f83d
+Author: Flávio Roberto <124847034+FlavioRobertoTavares@users.noreply.github.com>
+Date:   Mon May 27 22:52:33 2024 -0300
+
+    Merge pull request #1 from CharlysFarias03/main
+    
+    [feature] add Charlys' features
+
+[33mcommit 4e9f83d9477956065cf13d4182b2043395b28efa[m
+Author: Charlys Farias <charlesaugustoararaazul@gmail.com>
+Date:   Mon May 27 22:17:08 2024 -0300
+
+    update(user): update .feature file
+
+[33mcommit 2e19e7ff2597a83c0f4a59849e5caad0b36e284f[m
+Merge: 9c63af8 edb538a
+Author: Charlys Farias <charlesaugustoararaazul@gmail.com>
+Date:   Mon May 27 22:04:38 2024 -0300
+
+    fix(user): fix errors in merge with dev branch
+
+[33mcommit edb538a9bef24c15a348614bcb7bbfbf220eb21d[m
+Author: Charlys Farias <charlesaugustoararaazul@gmail.com>
+Date:   Mon May 27 21:54:41 2024 -0300
+
+    update(user): update .feature file with other scenario.
+
+[33mcommit 9c63af87a62e9172c22d1c0545d403c2fb291d32[m
+Author: Charlys Farias <charlesaugustoararaazul@gmail.com>
+Date:   Mon May 27 21:43:54 2024 -0300
+
+    update(user): update .feature file
+
+[33mcommit d14c287af4f71cfa1fbb793ea68c1cc48e2b5d91[m
+Author: Charlys Farias <charlesaugustoararaazul@gmail.com>
+Date:   Mon May 27 21:41:08 2024 -0300
+
+    update(user): update .feature file with other scenario.
+
+[33mcommit 8341f2a0d37591527f377ec2f738d8795b49156e[m
+Author: Charlys Farias <charlesaugustoararaazul@gmail.com>
+Date:   Mon May 27 20:58:37 2024 -0300
+
+    update(user): update .feature file with error scenarios
+
+[33mcommit e324974f127be2993f68c6ddf0bfb28af92feb9b[m
+Author: Charlys Farias <charlesaugustoararaazul@gmail.com>
+Date:   Mon May 27 20:51:58 2024 -0300
+
+    update(user): update .feature file
+
+[33mcommit 295da8b98ba3ab03b3091c1f84e99658985b722e[m
+Author: Charlys Farias <charlesaugustoararaazul@gmail.com>
+Date:   Mon May 27 19:57:04 2024 -0300
+
+    feat: creation of the recuperation and history features
+
+[33mcommit 28ca5fd4367d95cb7429ffbeaafa4c71fe2e929e[m
+Author: MusicalUsagi <tavaresbezerra4@gmail.com>
+Date:   Mon May 20 20:21:24 2024 -0300
+
+    Initial commit
+
+[33mcommit 17fa93feb313d0f45ce7d665bb9750e927b3ca45[m
+Author: Flávio Roberto <124847034+FlavioRobertoTavares@users.noreply.github.com>
+Date:   Mon May 20 20:20:14 2024 -0300
+
+    Delete backend directory
+
+[33mcommit a9c31d48c76565f2571691530720376495175c72[m
+Author: Flávio Roberto <124847034+FlavioRobertoTavares@users.noreply.github.com>
+Date:   Mon May 20 20:15:52 2024 -0300
+
+    Initial backend commit
