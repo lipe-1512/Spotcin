@@ -21,7 +21,7 @@ defineFeature(feature, (test) => {
     test('Criar uma nova categoria', ({ given, when, then, and }) => {
         given(/^o usuário "(.*)" está logado$/, async (username) => {});
 
-        given(/^existem as categorias "(.*)", "(.*)" e "(.*)"$/, async (cat1, cat2, cat3) => {
+        and(/^existem as categorias "(.*)", "(.*)", "(.*)"$/, async (cat1, cat2, cat3) => {
             await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat1 }));
             await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat2 }));
             await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat3 }));
@@ -48,7 +48,7 @@ defineFeature(feature, (test) => {
     test('Criar uma categoria que já existe', ({ given, when, then, and }) => {
         given(/^o usuário "(.*)" está logado$/, async (username) => {});
 
-        given(/^existem as categorias "(.*)", "(.*)" e "(.*)"$/, async (cat1, cat2, cat3) => {
+        and(/^existem as categorias "(.*)", "(.*)", "(.*)"$/, async (cat1, cat2, cat3) => {
             await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat1 }));
             await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat2 }));
             await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat3 }));
@@ -80,7 +80,7 @@ defineFeature(feature, (test) => {
 
         given(/^ele está na página "Categorias"$/, async () => {});
 
-        given(/^existem as categorias "(.*)" e "(.*)"$/, async (cat1, cat2) => {
+        and(/^existem as categorias "(.*)" e "(.*)"$/, async (cat1, cat2) => {
             await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat1 }));
             await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat2 }));
         });
@@ -105,7 +105,7 @@ defineFeature(feature, (test) => {
 
         given(/^ele está na página "Categorias"$/, async () => {});
 
-        given(/^existe a categoria "(.*)"$/, async (nome) => {
+        and(/^existe a categoria "(.*)"$/, async (nome) => {
             await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: nome }));
         });
 
@@ -114,10 +114,10 @@ defineFeature(feature, (test) => {
         });
 
         when(/^existem as playlists "(.*)" e "(.*)"$/, async (playlist1, playlist2) => {
-            const category = await mockCategoryRepository.getCategoria(playlist1.categories);
+            const category = await mockCategoryRepository.getCategoria(playlist1.nome);
             if (category) {
                 category.playlists = [playlist1, playlist2];
-                await mockCategoryRepository.updateCategoria(playlist1.categories, category);
+                await mockCategoryRepository.updateCategoria(category.id, category);
             }
         });
 
@@ -126,11 +126,13 @@ defineFeature(feature, (test) => {
         });
 
         then(/^as playlists "(.*)" e "(.*)" ficam sem categoria$/, async (playlist1, playlist2) => {
-            const category = await mockCategoryRepository.getCategoria(playlist1.categories);
-            if (category) {
-                expect(category.playlists).not.toContain(playlist1);
-                expect(category.playlists).not.toContain(playlist2);
-            }
+            const playlists = await Promise.all([
+                mockCategoryRepository.deleteCategoria(playlist1.categories),
+                mockCategoryRepository.deleteCategoria(playlist2.categories)
+            ]);
+            playlists.forEach(playlist => {
+                expect(playlist).toBeUndefined();
+            });
         });
 
         then(/^a categoria "(.*)" é apagada$/, async (nome) => {
@@ -144,7 +146,7 @@ defineFeature(feature, (test) => {
 
         given(/^ele está na página "Categorias"$/, async () => {});
 
-        given(/^existe a categoria "(.*)"$/, async (nome) => {
+        and(/^existe a categoria "(.*)"$/, async (nome) => {
             await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: nome }));
         });
 
@@ -153,7 +155,7 @@ defineFeature(feature, (test) => {
         });
 
         when(/^alterar o nome da categoria para "(.*)"$/, async (novoNome) => {
-            response = await request.put(`/api/categories/${novoNome}`);
+            response = await request.put(`/api/categories/${novoNome}`).send({ nome: novoNome });
         });
 
         when(/^selecionar a opção "confirmar"$/, async () => {});
@@ -171,7 +173,7 @@ defineFeature(feature, (test) => {
 
         given(/^ele está na página "Categorias"$/, async () => {});
 
-        given(/^existem as categorias "(.*)" e "(.*)"$/, async (cat1, cat2) => {
+        and(/^existem as categorias "(.*)" e "(.*)"$/, async (cat1, cat2) => {
             await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat1 }));
             await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat2 }));
         });
@@ -181,7 +183,7 @@ defineFeature(feature, (test) => {
         });
 
         when(/^alterar o nome da categoria para "(.*)"$/, async (novoNome) => {
-            response = await request.put(`/api/categories/${novoNome}`);
+            response = await request.put(`/api/categories/${novoNome}`).send({ nome: novoNome });
         });
 
         when(/^selecionar a opção "confirmar"$/, async () => {});
