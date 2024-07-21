@@ -1,6 +1,6 @@
 import BaseEntity from './base.entity';
 
-export default class CategoriaEntity extends BaseEntity {
+class CategoriaEntity extends BaseEntity {
   nome: string;
 
   constructor(data: Partial<CategoriaEntity>) {
@@ -8,3 +8,5 @@ export default class CategoriaEntity extends BaseEntity {
     this.nome = data.nome || '';
   }
 }
+
+export default CategoriaEntity;

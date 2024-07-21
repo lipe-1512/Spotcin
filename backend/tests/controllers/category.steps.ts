@@ -22,9 +22,9 @@ defineFeature(feature, (test) => {
         given(/^o usuário "(.*)" está logado$/, async (username) => {});
 
         given(/^existem as categorias "(.*)", "(.*)" e "(.*)"$/, async (cat1, cat2, cat3) => {
-            await mockCategoryRepository.createCategory(new CategoryEntity({ name: cat1 }));
-            await mockCategoryRepository.createCategory(new CategoryEntity({ name: cat2 }));
-            await mockCategoryRepository.createCategory(new CategoryEntity({ name: cat3 }));
+            await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat1 }));
+            await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat2 }));
+            await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat3 }));
         });
 
         given(/^estou na página "Categorias"$/, async () => {});
@@ -32,7 +32,7 @@ defineFeature(feature, (test) => {
         when(/^seleciono a opção "Criar categoria"$/, async () => {});
 
         when(/^preencho a categoria com o nome "(.*)"$/, async (categoryName) => {
-            response = await request.post('/api/categories').send({ name: categoryName });
+            response = await request.post('/api/categories').send({ nome: categoryName });
         });
 
         when(/^seleciono a opção "confirmar"$/, async () => {});
@@ -40,8 +40,8 @@ defineFeature(feature, (test) => {
         then(/^continuo na página "Categorias"$/, async () => {});
 
         then(/^a categoria "(.*)" aparece na lista de categorias$/, async (categoryName) => {
-            const categories = await mockCategoryRepository.getAllCategories();
-            expect(categories).toContainEqual(expect.objectContaining({ name: categoryName }));
+            const categories = await mockCategoryRepository.getCategorias();
+            expect(categories).toContainEqual(expect.objectContaining({ nome: categoryName }));
         });
     });
 
@@ -49,9 +49,9 @@ defineFeature(feature, (test) => {
         given(/^o usuário "(.*)" está logado$/, async (username) => {});
 
         given(/^existem as categorias "(.*)", "(.*)" e "(.*)"$/, async (cat1, cat2, cat3) => {
-            await mockCategoryRepository.createCategory(new CategoryEntity({ name: cat1 }));
-            await mockCategoryRepository.createCategory(new CategoryEntity({ name: cat2 }));
-            await mockCategoryRepository.createCategory(new CategoryEntity({ name: cat3 }));
+            await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat1 }));
+            await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat2 }));
+            await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat3 }));
         });
 
         given(/^estou na página "Categorias"$/, async () => {});
@@ -59,7 +59,7 @@ defineFeature(feature, (test) => {
         when(/^seleciono a opção "Criar categoria"$/, async () => {});
 
         when(/^preencho a categoria com o nome "(.*)"$/, async (categoryName) => {
-            response = await request.post('/api/categories').send({ name: categoryName });
+            response = await request.post('/api/categories').send({ nome: categoryName });
         });
 
         when(/^seleciono a opção "confirmar"$/, async () => {});
@@ -69,8 +69,8 @@ defineFeature(feature, (test) => {
         });
 
         then(/^não permiti criar categoria "(.*)"$/, async (categoryName) => {
-            const categories = await mockCategoryRepository.getAllCategories();
-            const category = categories.find(cat => cat.name === categoryName);
+            const categories = await mockCategoryRepository.getCategorias();
+            const category = categories.find(cat => cat.nome === categoryName);
             expect(category).toBeUndefined();
         });
     });
@@ -81,8 +81,8 @@ defineFeature(feature, (test) => {
         given(/^ele está na página "Categorias"$/, async () => {});
 
         given(/^existem as categorias "(.*)" e "(.*)"$/, async (cat1, cat2) => {
-            await mockCategoryRepository.createCategory(new CategoryEntity({ name: cat1 }));
-            await mockCategoryRepository.createCategory(new CategoryEntity({ name: cat2 }));
+            await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat1 }));
+            await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat2 }));
         });
 
         when(/^ele selecionar a categoria "(.*)"$/, async (categoryName) => {
@@ -95,8 +95,8 @@ defineFeature(feature, (test) => {
 
         then(/^ele consegue visualizar as playlists "(.*)" e "(.*)"$/, async (playlist1, playlist2) => {
             const playlists = response.body.playlists;
-            expect(playlists).toContainEqual(expect.objectContaining({ name: playlist1 }));
-            expect(playlists).toContainEqual(expect.objectContaining({ name: playlist2 }));
+            expect(playlists).toContainEqual(expect.objectContaining({ nome: playlist1 }));
+            expect(playlists).toContainEqual(expect.objectContaining({ nome: playlist2 }));
         });
     });
 
@@ -106,7 +106,7 @@ defineFeature(feature, (test) => {
         given(/^ele está na página "Categorias"$/, async () => {});
 
         given(/^existe a categoria "(.*)"$/, async (categoryName) => {
-            await mockCategoryRepository.createCategory(new CategoryEntity({ name: categoryName }));
+            await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: categoryName }));
         });
 
         when(/^ele selecionar a categoria "(.*)"$/, async (categoryName) => {
@@ -114,9 +114,9 @@ defineFeature(feature, (test) => {
         });
 
         when(/^existem as playlists "(.*)" e "(.*)"$/, async (playlist1, playlist2) => {
-            const category = await mockCategoryRepository.getCategoryByName(categoryName);
+            const category = await mockCategoryRepository.getCategorias();
             category.playlists = [playlist1, playlist2];
-            await mockCategoryRepository.updateCategory(category);
+            await mockCategoryRepository.updateCategoria(category);
         });
 
         when(/^selecionar excluir a categoria "(.*)"$/, async (categoryName) => {
@@ -124,13 +124,13 @@ defineFeature(feature, (test) => {
         });
 
         then(/^as playlists "(.*)" e "(.*)" ficam sem categoria$/, async (playlist1, playlist2) => {
-            const category = await mockCategoryRepository.getCategoryByName(categoryName);
+            const category = await mockCategoryRepository.getCategorias();
             expect(category.playlists).not.toContain(playlist1);
             expect(category.playlists).not.toContain(playlist2);
         });
 
         then(/^a categoria "(.*)" é apagada$/, async (categoryName) => {
-            const category = await mockCategoryRepository.getCategoryByName(categoryName);
+            const category = await mockCategoryRepository.getCategorias();
             expect(category).toBeUndefined();
         });
     });
@@ -141,7 +141,7 @@ defineFeature(feature, (test) => {
         given(/^ele está na página "Categorias"$/, async () => {});
 
         given(/^existe a categoria "(.*)"$/, async (categoryName) => {
-            await mockCategoryRepository.createCategory(new CategoryEntity({ name: categoryName }));
+            await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: categoryName }));
         });
 
         when(/^ele selecionar a categoria "(.*)"$/, async (categoryName) => {
@@ -149,7 +149,7 @@ defineFeature(feature, (test) => {
         });
 
         when(/^alterar o nome da categoria para "(.*)"$/, async (newCategoryName) => {
-            response = await request.put(`/api/categories/${categoryName}`).send({ name: newCategoryName });
+            response = await request.put(`/api/categories/${categoryName}`).send({ nome: newCategoryName });
         });
 
         when(/^selecionar a opção "confirmar"$/, async () => {});
@@ -157,8 +157,8 @@ defineFeature(feature, (test) => {
         then(/^continuo na página "Categorias"$/, async () => {});
 
         then(/^a categoria "(.*)" aparece na lista de categorias$/, async (newCategoryName) => {
-            const categories = await mockCategoryRepository.getAllCategories();
-            expect(categories).toContainEqual(expect.objectContaining({ name: newCategoryName }));
+            const categories = await mockCategoryRepository.getCategorias();
+            expect(categories).toContainEqual(expect.objectContaining({ nome: newCategoryName }));
         });
     });
 
@@ -168,8 +168,8 @@ defineFeature(feature, (test) => {
         given(/^ele está na página "Categorias"$/, async () => {});
 
         given(/^existem as categorias "(.*)" e "(.*)"$/, async (cat1, cat2) => {
-            await mockCategoryRepository.createCategory(new CategoryEntity({ name: cat1 }));
-            await mockCategoryRepository.createCategory(new CategoryEntity({ name: cat2 }));
+            await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat1 }));
+            await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: cat2 }));
         });
 
         when(/^ele selecionar a categoria "(.*)"$/, async (categoryName) => {
@@ -177,7 +177,7 @@ defineFeature(feature, (test) => {
         });
 
         when(/^alterar o nome da categoria para "(.*)"$/, async (newCategoryName) => {
-            response = await request.put(`/api/categories/${categoryName}`).send({ name: newCategoryName });
+            response = await request.put(`/api/categories/${categoryName}`).send({ nome: newCategoryName });
         });
 
         when(/^selecionar a opção "confirmar"$/, async () => {});
@@ -187,8 +187,8 @@ defineFeature(feature, (test) => {
         });
 
         then(/^a categoria "(.*)" não é alterada$/, async (categoryName) => {
-            const category = await mockCategoryRepository.getCategoryByName(categoryName);
-            expect(category.name).toBe(categoryName);
+            const category = await mockCategoryRepository.getCategorias();
+            expect(category).toBe(categoryName);
         });
     });
 
@@ -198,7 +198,7 @@ defineFeature(feature, (test) => {
         given(/^ele está na página "Categorias"$/, async () => {});
 
         given(/^existe a categoria "(.*)"$/, async (categoryName) => {
-            await mockCategoryRepository.createCategory(new CategoryEntity({ name: categoryName }));
+            await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: categoryName }));
         });
 
         when(/^ele selecionar a categoria "(.*)"$/, async (categoryName) => {
@@ -206,13 +206,13 @@ defineFeature(feature, (test) => {
         });
 
         when(/^selecionar a playlist "(.*)" para ser adicionada$/, async (playlistName) => {
-            const category = await mockCategoryRepository.getCategoryByName(categoryName);
+            const category = await mockCategoryRepository.getCategorias();
             category.playlists.push(playlistName);
-            await mockCategoryRepository.updateCategory(category);
+            await mockCategoryRepository.updateCategoria(category);
         });
 
         then(/^a playlist "(.*)" aparece na categoria "(.*)"$/, async (playlistName, categoryName) => {
-            const category = await mockCategoryRepository.getCategoryByName(categoryName);
+            const category = await mockCategoryRepository.getCategorias();
             expect(category.playlists).toContain(playlistName);
         });
     });
@@ -223,7 +223,7 @@ defineFeature(feature, (test) => {
         given(/^ele está na página "Categorias"$/, async () => {});
 
         given(/^existe a categoria "(.*)" com a playlist "(.*)"$/, async (categoryName, playlistName) => {
-            await mockCategoryRepository.createCategory(new CategoryEntity({ name: categoryName, playlists: [playlistName] }));
+            await mockCategoryRepository.createCategoria(new CategoryEntity({ nome: categoryName, playlists: [playlistName] }));
         });
 
         when(/^ele selecionar a categoria "(.*)"$/, async (categoryName) => {
@@ -231,13 +231,13 @@ defineFeature(feature, (test) => {
         });
 
         when(/^selecionar a playlist "(.*)" para ser removida$/, async (playlistName) => {
-            const category = await mockCategoryRepository.getCategoryByName(categoryName);
+            const category = await mockCategoryRepository.getCategorias();
             category.playlists = category.playlists.filter(playlist => playlist !== playlistName);
-            await mockCategoryRepository.updateCategory(category);
+            await mockCategoryRepository.updateCategoria(nome);
         });
 
         then(/^a playlist "(.*)" não aparece mais na categoria "(.*)"$/, async (playlistName, categoryName) => {
-            const category = await mockCategoryRepository.getCategoryByName(categoryName);
+            const category = await mockCategoryRepository.getCategorias();
             expect(category.playlists).not.toContain(playlistName);
         });
     });
