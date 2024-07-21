@@ -10,54 +10,42 @@ class CategoriaRepository extends BaseRepository<CategoriaEntity> {
   public async getCategorias(): Promise<CategoriaEntity[]> {
     try {
       return await this.findAll();
-    } catch (e) {
-      throw new InternalServerError({
-        msg: 'Erro ao buscar todas as categorias',
-      });
+    } catch (error) {
+      throw new InternalServerError();
     }
   }
 
-  public async getCategoria(nome: string): Promise<CategoriaEntity | null> {
+  public async createCategoria(categoria: CategoriaEntity): Promise<CategoriaEntity | undefined> {
     try {
-      return await this.findOne((item) => item.nome === nome);
-    } catch (e) {
-      throw new InternalServerError({
-        msg: `Erro ao buscar a categoria com o nome: ${nome}`,
-      });
+      return await this.add(categoria);
+    } catch (error) {
+      throw new InternalServerError();
     }
   }
 
-  public async createCategoria(data: CategoriaEntity): Promise<CategoriaEntity> {
+  public async updateCategoria(id: string, categoria: CategoriaEntity): Promise<CategoriaEntity | undefined> {
     try {
-      return await this.add(data);
-    } catch (e) {
-      throw new InternalServerError({
-        msg: 'Erro ao criar categoria',
-      });
+      const updatedCategoria = await this.update((cat) => cat.id === id, categoria);
+      return updatedCategoria ?? undefined;
+    } catch (error) {
+      throw new InternalServerError();
     }
   }
 
-  public async updateCategoria(nome: string, data: CategoriaEntity): Promise<CategoriaEntity | null> {
+  public async deleteCategoria(id: string): Promise<void> {
     try {
-      const updatedCategoria = await this.update((item) => item.nome === nome, data);
-      if (updatedCategoria === null) {
-        return null;
-      }
-      return updatedCategoria;
-    } catch (e) {
-      throw new InternalServerError({
-        msg: `Erro ao atualizar a categoria com o nome: ${nome}`,
-      });
+      await this.delete((cat) => cat.id === id);
+    } catch (error) {
+      throw new InternalServerError();
     }
   }
 
-  public async deleteCategoria(nome: string): Promise<void> {
+  public async getCategoria(id: string): Promise<CategoriaEntity | undefined> {
     try {
-      await this.delete((item) => item.nome === nome);
-    } catch (e) {
-      throw new InternalServerError({
-        msg: `Erro ao deletar a categoria com o nome: ${nome}`,
-      });
+      const categorias = await this.findAll();
+      return categorias.find((cat) => cat.id === id);
+    } catch (error) {
+      throw new InternalServerError();
     }
   }
 }
