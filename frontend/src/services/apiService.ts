@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 export function useApiService() {
-  const baseUrl = 'https://jsonplaceholder.typicode.com/users/1'; // Replace with your API URL
+  const baseUrl = 'http://localhost:5001/api'; 
 
   async function fetchData() {
     try {
@@ -15,7 +15,31 @@ export function useApiService() {
     }
   }
 
+  async function postUser(data) {
+    const endpoint = `${baseUrl}/users`;
+    try {
+      const response = await axios.post(endpoint, data);
+      return response.data;
+    } catch (error) {
+      console.error('Error posting data:', error);
+      throw error;
+    }
+  }
+
+  async function loginUser(data){
+    const endpoint = `${baseUrl}/login`;
+    try {
+      const response = await axios.post(endpoint, data);
+      return response.data;
+    } catch (error) {
+      console.error('Error posting data:', error);
+      throw error;
+    }
+  }
+
   return {
     fetchData,
+    postUser,
+    loginUser,
   };
 }
